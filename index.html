@@ -1,0 +1,376 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Dashboard - Page</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+		integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<link rel="stylesheet" href="./assets/css/main.css">
+</head>
+
+<body>
+
+	<div aria-live="polite" aria-atomic="true" class="position-relative">
+		<div class="toast-container top-0 end-0 p-3" id="toastContainer"></div>
+	</div>
+	<div class="navbar shadow position-sticky top-0 w-100" style="z-index: 10000;">
+		<div class="container">
+			<div class="w-100 d-flex align-items-center justify-content-between">
+				<div class="logo">
+					<a href="#" class="navbar-logo">
+						<img class="rounded-circle" src="./assets/img/tiwlt.png" width="80" height="80" alt="">
+					</a>
+				</div>
+				<div class="d-flex align-items-center gap-4 justify-content-end w-100">
+					<div class="icons d-none d-lg-flex gap-3 align-items-center justify-content-end">
+						<div class="itemLanguage rounded-circle dropdown">
+							<button
+								class="btn shadow-none border-0 rounded-circle d-flex align-items-center justify-content-center"
+								style="width: 40px; height: 40px;" type="button" data-bs-toggle="dropdown"
+								aria-expanded="false">
+								<i class="fa-solid fa-language fs-5"></i>
+							</button>
+							<ul class="dropdown-menu">
+								<li class="dropdown-item user-select-none">Uzbek</li>
+								<li class="dropdown-item active user-select-none">English</li>
+								<li class="dropdown-item user-select-none">Russian</li>
+							</ul>
+						</div>
+
+						<div class="item sunOrMoon shadow-none rounded-circle d-flex align-items-center justify-content-center"
+							style="width: 40px; height: 40px; cursor: pointer;">
+							<i class="fa-regular fa-sun fs-5"></i>
+						</div>
+						<div class="item shadow-none rounded-circle d-flex align-items-center justify-content-center"
+							style="width: 40px; height: 40px; cursor: pointer;">
+							<i class="fa-regular fa-bell fs-5"></i>
+						</div>
+					</div>
+					<div class="icons d-block d-lg-none justify-content-end">
+						<div class="item shadow-none rounded-circle d-flex align-items-center justify-content-center">
+							<i class="fa-solid fa-bars fs-5"></i>
+						</div>
+					</div>
+					<div class="user-information d-flex gap-2 align-items-center justify-content-end">
+						<div class="user-name text-end d-none d-lg-block">
+							<p class="mb-0 text-capitalize fw-bold">Ozodov Mirafzal</p>
+							<span class="mb-0">mira******@gmail.com</span>
+						</div>
+						<div class="user-image">
+							<img src="./assets/img/images.png" class="rounded-circle" width="50" height="50" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-xl container">
+		<div class="modal fade" id="userUpdateToggle" tabindex="-1" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div class="form-container py-3 px-2">
+							<div class="form">
+								<input class="updateInput form-control w-100 bg-white border-0 py-3 px-4 mt-3 input"
+									type="text" name="firstname" placeholder="First Name">
+
+								<input class="updateInput form-control w-100 bg-white border-0 py-3 px-4 mt-3 input"
+									type="text" name="lastname" placeholder="Last Name">
+
+								<div class="position-relative">
+									<input id="changeType3"
+										class="updateInput form-control w-100 bg-white border-0 py-3 px-4 mt-3 input"
+										type="password" name="password" placeholder="Password">
+									<div class="eyes position-absolute end-0 top-50 translate-middle-y me-4 fs-5"
+										data-passwordId="changeType3" style="cursor: pointer;">
+										<i class="fa-solid fa-eye"></i>
+									</div>
+								</div>
+
+								<div class="form-check  mt-3">
+									<label for="isVerified" class="form-check-label mb-0">Is Verified</label>
+									<input class="updateInput form-check-input form-lg-check-input" type="checkbox"
+										id="isVerified" name="isVerified">
+								</div>
+
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div class="d-flex align-items-center w-100 gap-4">
+							<button type="button" data-bs-dismiss="modal" aria-label="Close"
+								class="btn btn-secondary border-0 shadow-none fw-bold text-white mt-3 mx-auto rounded-pill border-0 py-3 mb-3">Close</button>
+							<button id="updateUser"
+								class="login-button d-block w-100 fw-bold text-white mt-3 mx-auto rounded-pill border-0 py-3 mb-3">
+								<i class="fa-solid fa-user-plus me-2"></i> Update User
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="userDeleteToggle" tabindex="-1" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="modal-body">
+						<p class="text-muted text-center mt-4">
+							You agree to delete this user. Once it's gone, it can't be recovered. Click "Yes" button if
+							you want to delete, otherwise click "No" button.
+						</p>
+					</div>
+					<div class="modal-footer">
+						<div class="d-flex align-items-center w-100 gap-4">
+							<button id="doNotDeleteUser"
+								class="btn btn-primary d-block w-100 border-0 shadow-none fw-bold text-white mt-3 mx-auto rounded-pill border-0 py-3 mb-3">No</button>
+							<button id="deleteUser"
+								class="bg-danger d-block w-100 fw-bold text-white mt-3 mx-auto rounded-pill border-0 py-3 mb-3">Yes
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="anaListic row w-100 mx-auto g-4 pb-4 row-cols-1 row-cols-md-2 row-cols-lg-4 my-4 rounded">
+			<div class="col">
+				<div class="item d-flex align-items-start justify-content-between border py-2 px-3 rounded shadow">
+					<div class="text">
+						<p class="mb-0 text-capitalize">Session</p>
+						<h5 class="my-2 fs-5 fw-bold" id="totalUser"></h5>
+						<p class="mb-0 text-capitalize">Total Users</p>
+					</div>
+					<div class="images rounded-circle d-flex align-items-center justify-content-center">
+						<i class="fa-solid fa-user icon"></i>
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="item d-flex align-items-start justify-content-between border py-2 px-3 rounded shadow">
+					<div class="text">
+						<p class="mb-0 text-capitalize">Active Users</p>
+						<h5 class="my-2 fs-5 fw-bold" id="isActive"></h5>
+						<p class="mb-0 text-capitalize">All The Users</p>
+					</div>
+					<div class="images rounded-circle d-flex align-items-center justify-content-center">
+						<i class="fa-solid fa-user fs-5"></i>
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="item d-flex align-items-start justify-content-between border py-2 px-3 rounded shadow">
+					<div class="text">
+						<p class="mb-0 text-capitalize">Inactive</p>
+						<h5 class="my-2 fs-5 fw-bold" id="isInActive"></h5>
+						<p class="mb-0 text-capitalize">Total Users</p>
+					</div>
+					<div class="images rounded-circle d-flex align-items-center justify-content-center">
+						<i class="fa-solid fa-user"></i>
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="item d-flex align-items-start justify-content-between border py-2 px-3 rounded shadow">
+					<div class="text">
+						<p class="mb-0 text-capitalize">Created Users</p>
+						<h5 class="my-2 fs-5 fw-bold" id="lastMonthCreated"></h5>
+						<p class="mb-0 text-capitalize">Last Month</p>
+					</div>
+					<div class="images rounded-circle d-flex align-items-center justify-content-center">
+						<i class="fa-solid fa-user"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row w-100 mx-auto g-4 pb-4 my-4 bg-white rounded">
+			<div class="col-12 col-sm-4 col-md-4 col-lg-2">
+				<div class="form-group">
+					<select id="sorted" class="sInput form-control w-100 bg-white border-0 py-3 px-4 input">
+						<option value="">Select one--</option>
+						<option value="A-Z (First Name)">A-Z (First Name)</option>
+						<option value="Z-A (First Name)">Z-A (First Name)</option>
+						<option value="A-Z (Last Name)">A-Z (Last Name)</option>
+						<option value="Z-A (Last Name)">Z-A (Last Name)</option>
+						<option value="lastCreated">Last Created</option>
+						<option value="firstCreated">First Created</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-12 col-sm-4 col-md-4 col-lg-2">
+				<div class="form-group">
+					<select id="activeOrInActive" class="sInput form-control w-100 bg-white border-0 py-3 px-4 input">
+						<option value="">Select one--</option>
+						<option value="active">Active</option>
+						<option value="inActive">InActive</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-12 col-sm-4 col-md-4 col-lg-2">
+				<div class="form-group">
+					<select id="searchField" class="sInput form-control w-100 bg-white border-0 py-3 px-4 input">
+						<option value="">Select one--</option>
+						<option value="email">Email</option>
+						<option value="lastname">Last Name</option>
+						<option value="firstname">First Name</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-12 col-sm-10 col-md-10 col-lg-5">
+				<div class="form-group">
+					<input type="text" id="searching"
+						class="sInput form-control w-100 bg-white border-0 py-3 px-2 input"
+						placeholder="🔍 Search User">
+				</div>
+			</div>
+			<div class="col-12 col-sm-2 col-md-2 col-lg-1">
+				<button type="button"
+					class="login-button d-block w-100 fw-bold text-white mx-auto rounded-pill border-0 p-3"
+					data-bs-toggle="modal" data-bs-target="#createUserModal">
+					<i class="fa-solid fa-user-plus"></i>
+				</button>
+				<div class="modal fade mt-5" id="createUserModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+					aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+						<div class="modal-content">
+							<div class="modal-body">
+								<div class="form-container py-3 px-2">
+									<div class="form">
+										<input class="rInput form-control w-100 bg-white border-0 py-3 px-4 mt-3 input"
+											type="text" name="firstname" placeholder="First Name">
+
+										<input class="rInput form-control w-100 bg-white border-0 py-3 px-4 mt-3 input"
+											type="text" name="lastname" placeholder="Last Name">
+
+										<input class="rInput form-control w-100 bg-white border-0 py-3 px-4 mt-3 input"
+											type="email" name="email" id="email" placeholder="E-mail">
+
+										<div class="position-relative">
+											<input id="changeType"
+												class="rInput form-control w-100 bg-white border-0 py-3 px-4 mt-3 input"
+												type="password" name="password" placeholder="Password">
+											<div class="eyes position-absolute end-0 top-50 translate-middle-y me-4 fs-5"
+												data-passwordId="changeType" style="cursor: pointer;">
+												<i class="fa-solid fa-eye"></i>
+											</div>
+										</div>
+										<div class="position-relative">
+											<input id="changeType2"
+												class="rInput form-control w-100 bg-white border-0 py-3 px-4 mt-3 input"
+												type="password" name="confirmPassword" placeholder="Confirm Password">
+											<div class="eyes position-absolute end-0 top-50 translate-middle-y me-4 fs-5"
+												data-passwordId="changeType2" style="cursor: pointer;">
+												<i class="fa-solid fa-eye"></i>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<div class="d-flex align-items-center w-100 gap-4">
+									<button type="button"
+										class="btn btn-secondary fw-bold text-white mt-3 mx-auto rounded-pill border-0 py-3 mb-3"
+										data-bs-dismiss="modal">Close</button>
+									<button onclick="modalCreate()"
+										class="login-button d-block w-100 fw-bold text-white mt-3 mx-auto rounded-pill border-0 py-3 mb-3">
+										<i class="fa-solid fa-user-plus me-2"></i> Create User
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row w-100 mx-auto py-4 my-4 bg-white rounded">
+			<div class="table-responsive">
+				<h3 class="fw-bold text-capitalize text-dark" id="getUserListNum"></h3>
+				<table class="table align-middle table-bordered table-hover border-dark mb-0" style="cursor: pointer;">
+					<thead class="table-dark text-nowrap">
+						<tr>
+							<th class="py-3">No</th>
+							<th class="py-3">First Name</th>
+							<th class="py-3">Last Name</th>
+							<th class="py-3">Email</th>
+							<th class="py-3">Is Staff</th>
+							<th class="text-end py-3">Action</th>
+						</tr>
+					</thead>
+					<tbody class="tbody"></tbody>
+				</table>
+			</div>
+			<nav class="float-end">
+				<div class="d-block d-sm-flex justify-content-end align-items-center mt-4 gap-4">
+					<div class="form-group d-flex gap-3 align-items-center justify-content-end mb-4 mb-sm-0 text-muted">
+						<label for="rowPerPage" class="form-label text-nowrap">Rows per page:</label>
+						<select name="page" id="rowPerPage" class="form-select shadow-none text-muted w-auto">
+							<option value="10">10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
+							<option value="25">25</option>
+							<option value="30">30</option>
+							<option value="35">35</option>
+							<option value="40">40</option>
+							<option value="45">45</option>
+							<option value="50">50</option>
+						</select>
+					</div>
+
+					<ul class="pagination justify-content-end gap-2 mb-0">
+						<li class="page-item" id="previousPage" style="width: 35px; height: 35px;">
+							<button
+								class="page-link shadow-none text-dark w-100 h-100 d-flex align-items-center justify-content-center rounded-circle">
+								<i class="fa-solid fa-circle-arrow-left"></i>
+							</button>
+						</li>
+						<!-- <li class="page-item" style="width: 35px; height: 35px;">
+							<a class="page-link shadow-none text-muted w-100 h-100 d-flex align-items-center justify-content-center rounded-circle"
+								href="#">1</a>
+						</li>
+						<li class="page-item" style="width: 35px; height: 35px;">
+							<a class="page-link shadow-none text-muted w-100 h-100 d-flex align-items-center justify-content-center rounded-circle"
+								href="#">2</a>
+						</li>
+						<li class="page-item" style="width: 35px; height: 35px;">
+							<a class="page-link shadow-none text-muted w-100 h-100 d-flex align-items-center justify-content-center rounded-circle"
+								href="#">3</a>
+						</li> -->
+						<li class="page-item" id="nextPage" style="width: 35px; height: 35px;">
+							<button
+								class="page-link shadow-none text-dark w-100 h-100 d-flex align-items-center justify-content-center rounded-circle">
+								<i class="fa-solid fa-circle-arrow-right"></i>
+							</button>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+		integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+		crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+		integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+		crossorigin="anonymous"></script>
+
+
+	<script src="./assets/js/utils/eyes.js"></script>
+	<script src="./assets/js/updateUser.js" type="module"></script>
+	<script src="./assets/js/deleteUser.js" type="module"></script>
+	<script src="./assets/js/index.js" type="module"></script>
+
+</body>
+
+
+</html>
